@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4806B4861D988E9D005097B3 /* TabState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806B4851D988E9D005097B3 /* TabState.swift */; };
 		4838A4431D983B580055ED50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838A4421D983B580055ED50 /* AppDelegate.swift */; };
 		4838A4451D983B580055ED50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838A4441D983B580055ED50 /* ViewController.swift */; };
 		4838A4481D983B580055ED50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4838A4461D983B580055ED50 /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4806B4851D988E9D005097B3 /* TabState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabState.swift; sourceTree = "<group>"; };
 		4838A43F1D983B580055ED50 /* TabSwitcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabSwitcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4838A4421D983B580055ED50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4838A4441D983B580055ED50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4806B4871D988EA2005097B3 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				4806B4851D988E9D005097B3 /* TabState.swift */,
+				4838A4701D9840C40055ED50 /* TabButton.swift */,
+			);
+			name = Tab;
+			sourceTree = "<group>";
+		};
 		4838A4361D983B570055ED50 = {
 			isa = PBXGroup;
 			children = (
@@ -126,9 +137,9 @@
 		4838A4411D983B580055ED50 /* TabSwitcher */ = {
 			isa = PBXGroup;
 			children = (
+				4806B4871D988EA2005097B3 /* Tab */,
 				4838A4421D983B580055ED50 /* AppDelegate.swift */,
 				4838A4441D983B580055ED50 /* ViewController.swift */,
-				4838A4701D9840C40055ED50 /* TabButton.swift */,
 				4838A4491D983B580055ED50 /* Assets.xcassets */,
 				4838A4461D983B580055ED50 /* Main.storyboard */,
 				4838A44B1D983B580055ED50 /* LaunchScreen.storyboard */,
@@ -304,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4838A4711D9840C40055ED50 /* TabButton.swift in Sources */,
+				4806B4861D988E9D005097B3 /* TabState.swift in Sources */,
 				4838A4451D983B580055ED50 /* ViewController.swift in Sources */,
 				4838A4431D983B580055ED50 /* AppDelegate.swift in Sources */,
 			);
@@ -562,6 +574,7 @@
 				4838A4691D983B580055ED50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4838A46A1D983B580055ED50 /* Build configuration list for PBXNativeTarget "TabSwitcherTests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +583,7 @@
 				4838A46C1D983B580055ED50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4838A46D1D983B580055ED50 /* Build configuration list for PBXNativeTarget "TabSwitcherUITests" */ = {
 			isa = XCConfigurationList;
@@ -578,6 +592,7 @@
 				4838A46F1D983B580055ED50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
