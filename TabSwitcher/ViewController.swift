@@ -41,14 +41,19 @@ class ViewController: UIViewController {
      Add auto-layout's constraints to the view
      */
     private func addConstraints() {
+        let statusBarFrame: CGRect = UIApplication.shared.statusBarFrame
+        
         constrain(self.view, tabButton) { container, tab in
             tab.leading == container.leading
             tab.trailing == container.trailing
             
-            tab.top == container.top
-            tab.bottom == container.top + 40
+            tab.top == container.top + statusBarFrame.height
+            tab.bottom == container.top + statusBarFrame.height + ViewController.TabBarHeight
         }
     }
+    
+    /// The tab bar height
+    private static let TabBarHeight: CGFloat = 40
 
 }
 

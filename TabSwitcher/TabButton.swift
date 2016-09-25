@@ -16,6 +16,8 @@ class TabButton: UIView {
         super.init(frame: CGRect.zero)
         
         addSubViews()
+        
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,13 +36,23 @@ class TabButton: UIView {
         
         super.layoutSubviews()
         
-        button.frame = frame
+        button.frame = CGRect(x: 0,
+                              y: 0,
+                              width: frame.width,
+                              height: frame.height)
         
         indicator.frame = CGRect(x: 0,
-                                 y: bounds.height - TabButton.IndicatorHeight,
-                                 width: bounds.width,
+                                 y: frame.height - TabButton.IndicatorHeight,
+                                 width: frame.width,
                                  height: TabButton.IndicatorHeight )
         
+    }
+    
+    /**
+     Obj-C method called when button is tapped
+     */
+    @objc private func buttonTapped() {
+        print("button tapped")
     }
     
     /**
@@ -58,5 +70,5 @@ class TabButton: UIView {
     }
     
     /// The height for the indicator view
-    static let IndicatorHeight: CGFloat = 5
+    static let IndicatorHeight: CGFloat = 2
 }
