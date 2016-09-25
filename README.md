@@ -5,4 +5,4 @@ It is still a work in progress.
 
 The current state of the project:
 
-![alt text](http://imgur.com/YVnY6oy "Tab bar button selection indicator animation")
+![alt text](http://i.imgur.com/YVnY6oy.gif "Tab bar button selection indicator animation")
