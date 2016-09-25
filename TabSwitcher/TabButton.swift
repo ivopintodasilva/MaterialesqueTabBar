@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Cartography
 
+/**
+ The tab button view
+ */
 class TabButton: UIView {
+    var state: TabState = .Normal
+    
     let button: UIButton = UIButton(frame: CGRect.zero)
     let indicator: UIView = UIView(frame: CGRect.zero)
     
@@ -16,6 +22,8 @@ class TabButton: UIView {
         super.init(frame: CGRect.zero)
         
         addSubViews()
+        
+        addConstraints()
         
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
@@ -27,32 +35,60 @@ class TabButton: UIView {
     /**
      Add the subviews to the view
      */
-    func addSubViews() {
+    private func addSubViews() {
         addSubview(button)
         addSubview(indicator)
     }
     
-    override func layoutSubviews() {
-        
-        super.layoutSubviews()
-        
-        button.frame = CGRect(x: 0,
-                              y: 0,
-                              width: frame.width,
-                              height: frame.height)
-        
-        indicator.frame = CGRect(x: 0,
-                                 y: frame.height - TabButton.IndicatorHeight,
-                                 width: frame.width,
-                                 height: TabButton.IndicatorHeight )
-        
+    var indicatorWidth: NSLayoutConstraint?
+    
+    /**
+     Add auto-layout constraints to the view
+     */
+    private func addConstraints() {
+        constrain(self, button, indicator) { container, button, indicator in
+            button.edges == container.edges
+            
+            indicator.centerX == container.centerX
+            indicator.bottom == container.bottom
+            indicator.height == TabButton.IndicatorHeight
+            indicatorWidth = (indicator.width == TabButton.IndicatorInitialWidth)
+        }
     }
+
     
     /**
      Obj-C method called when button is tapped
      */
     @objc private func buttonTapped() {
-        print("button tapped")
+        /// Make sure that the width constraint already exists
+        guard let widthConstraint = indicatorWidth else { return }
+        
+        /// Remove the constraint
+        removeConstraint(widthConstraint)
+        indicator.removeConstraint(widthConstraint)
+        
+        /// Attribute the new constraints and switch states
+        switch state {
+        case .Normal:
+            constrain(self, indicator) { container, indicator in
+                indicatorWidth = (indicator.width == container.width)
+            }
+            
+            state = .Highlighted
+        case .Highlighted:
+            constrain(indicator) { indicator in
+                indicatorWidth = (indicator.width == TabButton.IndicatorInitialWidth)
+            }
+            
+            state = .Normal
+        }
+
+        /// Force the view layout and animate it
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+                self.layoutIfNeeded()
+            }, completion: nil)
+        
     }
     
     /**
@@ -69,6 +105,7 @@ class TabButton: UIView {
         indicator.backgroundColor = indicatorColor
     }
     
-    /// The height for the indicator view
+    /// The initial height and width for the indicator view
     static let IndicatorHeight: CGFloat = 2
+    static let IndicatorInitialWidth: CGFloat = 5
 }
