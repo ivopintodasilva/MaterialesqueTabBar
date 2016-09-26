@@ -11,13 +11,12 @@ import Cartography
 
 class ViewController: UIViewController {
     
-    let tabButton: TabButton = TabButton(frame: CGRect.zero)
+    let tabBar: TabBar = TabBar(tabs: ["First", "Second", "Third"],
+                                titleColor: ViewController.TitleColor,
+                                indicatorColor: ViewController.IndicatorColor)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        tabButton.configure(title: "Button", titleColor: UIColor.gray, indicatorColor: UIColor.red)
         
         addSubviews()
         
@@ -34,7 +33,7 @@ class ViewController: UIViewController {
      Add subviews to the ViewController's view
      */
     private func addSubviews() {
-        view.addSubview(tabButton)
+        view.addSubview(tabBar)
     }
     
     /**
@@ -43,17 +42,19 @@ class ViewController: UIViewController {
     private func addConstraints() {
         let statusBarFrame: CGRect = UIApplication.shared.statusBarFrame
         
-        constrain(self.view, tabButton) { container, tab in
-            tab.leading == container.leading
-            tab.trailing == container.trailing
+        constrain(self.view, tabBar) { container, tabBar in
+            tabBar.leading == container.leading
+            tabBar.trailing == container.trailing
             
-            tab.top == container.top + statusBarFrame.height
-            tab.bottom == container.top + statusBarFrame.height + ViewController.TabBarHeight
+            tabBar.top == container.top + statusBarFrame.height
+            tabBar.bottom == container.top + statusBarFrame.height + ViewController.TabBarHeight
         }
     }
     
     /// The tab bar height
     private static let TabBarHeight: CGFloat = 40
 
+    private static let TitleColor: UIColor = UIColor.gray
+    private static let IndicatorColor: UIColor = UIColor.red
 }
 

@@ -17,6 +17,7 @@
 		4838A4631D983B580055ED50 /* TabSwitcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838A4621D983B580055ED50 /* TabSwitcherUITests.swift */; };
 		4838A4711D9840C40055ED50 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4838A4701D9840C40055ED50 /* TabButton.swift */; };
 		4838A47B1D9848B80055ED50 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4838A4731D9840DB0055ED50 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4847DCD81D99CC9100540F57 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4847DCD71D99CC9100540F57 /* TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		4838A4701D9840C40055ED50 /* TabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		4838A4731D9840DB0055ED50 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
 		4838A4751D9840E00055ED50 /* Cartography.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Cartography.framework.dSYM; path = Carthage/Build/iOS/Cartography.framework.dSYM; sourceTree = "<group>"; };
+		4847DCD71D99CC9100540F57 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,13 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4806B4871D988EA2005097B3 /* Tab */ = {
+		4806B4871D988EA2005097B3 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				4806B4851D988E9D005097B3 /* TabState.swift */,
 				4838A4701D9840C40055ED50 /* TabButton.swift */,
+				4847DCD71D99CC9100540F57 /* TabBar.swift */,
 			);
-			name = Tab;
+			name = TabBar;
 			sourceTree = "<group>";
 		};
 		4838A4361D983B570055ED50 = {
@@ -137,7 +140,7 @@
 		4838A4411D983B580055ED50 /* TabSwitcher */ = {
 			isa = PBXGroup;
 			children = (
-				4806B4871D988EA2005097B3 /* Tab */,
+				4806B4871D988EA2005097B3 /* TabBar */,
 				4838A4421D983B580055ED50 /* AppDelegate.swift */,
 				4838A4441D983B580055ED50 /* ViewController.swift */,
 				4838A4491D983B580055ED50 /* Assets.xcassets */,
@@ -318,6 +321,7 @@
 				4806B4861D988E9D005097B3 /* TabState.swift in Sources */,
 				4838A4451D983B580055ED50 /* ViewController.swift in Sources */,
 				4838A4431D983B580055ED50 /* AppDelegate.swift in Sources */,
+				4847DCD81D99CC9100540F57 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
