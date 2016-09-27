@@ -76,7 +76,7 @@ class TabBar: UIView {
             indicatorCenter = (indicator.centerX == firstTab.centerX)
             indicator.bottom == container.bottom
             indicator.height == TabBar.IndicatorHeight
-            indicatorWidth = (indicator.width == TabBar.IndicatorInitialWidth)
+            indicatorWidth = (indicator.width == firstTab.width)
         }
         
         /// The following tabs come after the others
@@ -92,8 +92,8 @@ class TabBar: UIView {
     }
     
     /// The initial height and width for the indicator view
-    private static let IndicatorHeight: CGFloat = 2
-    private static let IndicatorInitialWidth: CGFloat = 5
+    internal static let IndicatorHeight: CGFloat = 2
+    internal static let IndicatorInitialWidth: CGFloat = 5
 }
 
 extension TabBar: TabButtonDelegate {
@@ -101,24 +101,54 @@ extension TabBar: TabButtonDelegate {
     func buttonTapped(index: Int) {
         
         /// Make sure that the width constraint already exists
-        guard let widthConstraint = indicatorWidth,
-            let centerConstraint = indicatorCenter
+        guard let centerConstraint = indicatorCenter
             else { return }
         
-        /// Remove the constraint
-        //removeConstraint(widthConstraint)
-        removeConstraint(centerConstraint)
-        //indicator.removeConstraint(widthConstraint)
-        indicator.removeConstraint(centerConstraint)
         
-        constrain(indicator, tabButtons[index]) { indicator, selectedTab in
-            indicatorCenter = (indicator.centerX == selectedTab.centerX)
-        }
-
-        /// Force the view layout and animate it
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+        /// Chain animate the indicator change
+        UIView.animateKeyframes(withDuration: 0.9, delay: 0, options: .beginFromCurrentState, animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: (0.25)) {
+                
+                if let widthConstraint = self.indicatorWidth {
+                    self.removeConstraint(widthConstraint)
+                    self.indicator.removeConstraint(widthConstraint)
+                    self.tabButtons[index].removeConstraint(widthConstraint)
+                }
+                
+                constrain(self.indicator, self.tabButtons[index]) { indicator, selectedTab in
+                    self.indicatorWidth = (indicator.width == TabBar.IndicatorInitialWidth)
+                }
+                
+                self.layoutIfNeeded()
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.5) {
+                self.removeConstraint(centerConstraint)
+                
+                constrain(self.indicator, self.tabButtons[index]) { indicator, selectedTab in
+                    self.indicatorCenter = (indicator.centerX == selectedTab.centerX)
+                }
+                
+                self.layoutIfNeeded()
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+                
+                if let widthConstraint = self.indicatorWidth {
+                    self.removeConstraint(widthConstraint)
+                    self.indicator.removeConstraint(widthConstraint)
+                    self.tabButtons[index].removeConstraint(widthConstraint)
+                }
+                
+                constrain(self.indicator, self.tabButtons[index]) { indicator, selectedTab in
+                    self.indicatorWidth = (indicator.width == selectedTab.width)
+                }
+                
+                self.layoutIfNeeded()
+            }
+            
+            }, completion: nil)
         
     }
 }

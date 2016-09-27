@@ -27,6 +27,12 @@ class TabButton: UIView {
     
     private let tabIndex: Int
     
+    var titleWidth: CGFloat? {
+        let titleLabel = button.titleLabel
+        titleLabel?.sizeToFit()
+        return titleLabel?.frame.width
+    }
+    
     weak var delegate: TabButtonDelegate?
     
     init(frame: CGRect, index: Int) {
