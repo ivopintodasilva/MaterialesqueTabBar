@@ -10,15 +10,28 @@ import UIKit
 import Cartography
 
 /**
+ The tab button delegate to delegate the button tapped action
+ */
+protocol TabButtonDelegate: class {
+    func buttonTapped(index: Int)
+}
+
+/**
  The tab button view
  */
 class TabButton: UIView {
-    var state: TabState = .Normal
     
-    let button: UIButton = UIButton(frame: CGRect.zero)
-    let indicator: UIView = UIView(frame: CGRect.zero)
+    private var state: TabState = .Normal
     
-    override init(frame: CGRect) {
+    private let button: UIButton = UIButton(frame: CGRect.zero)
+    
+    private let tabIndex: Int
+    
+    weak var delegate: TabButtonDelegate?
+    
+    init(frame: CGRect, index: Int) {
+        tabIndex = index
+        
         super.init(frame: CGRect.zero)
         
         addSubViews()
@@ -37,22 +50,14 @@ class TabButton: UIView {
      */
     private func addSubViews() {
         addSubview(button)
-        addSubview(indicator)
     }
-    
-    var indicatorWidth: NSLayoutConstraint?
     
     /**
      Add auto-layout constraints to the view
      */
     private func addConstraints() {
-        constrain(self, button, indicator) { container, button, indicator in
+        constrain(self, button) { container, button in
             button.edges == container.edges
-            
-            indicator.centerX == container.centerX
-            indicator.bottom == container.bottom
-            indicator.height == TabButton.IndicatorHeight
-            indicatorWidth = (indicator.width == TabButton.IndicatorInitialWidth)
         }
     }
 
@@ -61,51 +66,18 @@ class TabButton: UIView {
      Obj-C method called when button is tapped
      */
     @objc private func buttonTapped() {
-        /// Make sure that the width constraint already exists
-        guard let widthConstraint = indicatorWidth else { return }
-        
-        /// Remove the constraint
-        removeConstraint(widthConstraint)
-        indicator.removeConstraint(widthConstraint)
-        
-        /// Attribute the new constraints and switch states
-        switch state {
-        case .Normal:
-            constrain(self, indicator) { container, indicator in
-                indicatorWidth = (indicator.width == container.width)
-            }
-            
-            state = .Highlighted
-        case .Highlighted:
-            constrain(indicator) { indicator in
-                indicatorWidth = (indicator.width == TabButton.IndicatorInitialWidth)
-            }
-            
-            state = .Normal
-        }
-
-        /// Force the view layout and animate it
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-                self.layoutIfNeeded()
-            }, completion: nil)
-        
+        delegate?.buttonTapped(index: tabIndex)
     }
     
     /**
      Configure the button with the title and indicator's color
      
      - parameter title:String The title of the button
-     - parameter indicatorColor:UIColor The color for the button's indicator
      */
-    func configure(title: String, titleColor: UIColor, indicatorColor: UIColor) {
+    func configure(title: String, titleColor: UIColor) {
         
         button.setTitle(title, for: .normal)
         button.setTitleColor(titleColor, for: .normal)
         
-        indicator.backgroundColor = indicatorColor
     }
-    
-    /// The initial height and width for the indicator view
-    static let IndicatorHeight: CGFloat = 2
-    static let IndicatorInitialWidth: CGFloat = 5
 }
