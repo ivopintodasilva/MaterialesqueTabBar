@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     let tabBar: TabBar = TabBar(tabs: ["First", "Second", "Third"],
                                 titleColor: ViewController.TitleColor,
                                 indicatorColor: ViewController.IndicatorColor,
-                                font: UIFont(name: "Avenir", size: 14))
+                                font: ViewController.TitleFont)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,9 @@ class ViewController: UIViewController {
     /// The tab bar height
     private static let TabBarHeight: CGFloat = 40
 
+    /// Mocked customisable attributes
     private static let TitleColor: UIColor = UIColor.gray
+    private static let TitleFont: UIFont? = UIFont(name: "Avenir", size: 14)
     private static let IndicatorColor: UIColor = UIColor.red
 }
 
