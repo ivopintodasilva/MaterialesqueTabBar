@@ -15,7 +15,7 @@ class TabBar: UIView {
     
     internal let indicator: UIView = UIView(frame: CGRect.zero)
 
-    init(tabs: [String], titleColor: UIColor, indicatorColor: UIColor) {
+    init(tabs: [String], titleColor: UIColor, indicatorColor: UIColor, font: UIFont?) {
         
         super.init(frame: CGRect.zero)
         
@@ -24,7 +24,7 @@ class TabBar: UIView {
             let tabButton: TabButton = TabButton(frame: CGRect.zero, index: i)
             
             /// Configure the tab button
-            tabButton.configure(title: tabs[i], titleColor: titleColor)
+            tabButton.configure(title: tabs[i], color: titleColor, font: font)
             
             tabButton.delegate = self
             

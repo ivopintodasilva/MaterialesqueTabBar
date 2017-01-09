@@ -10,6 +10,6 @@
  Enum that describes the tab state
  */
 enum TabState {
-    case Normal
-    case Highlighted
+    case normal
+    case highlighted
 }

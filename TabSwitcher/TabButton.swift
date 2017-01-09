@@ -21,7 +21,7 @@ protocol TabButtonDelegate: class {
  */
 class TabButton: UIView {
     
-    private var state: TabState = .Normal
+    private var state: TabState = .normal
     
     private let button: UIButton = UIButton(frame: CGRect.zero)
     
@@ -80,10 +80,11 @@ class TabButton: UIView {
      
      - parameter title:String The title of the button
      */
-    func configure(title: String, titleColor: UIColor) {
+    func configure(title: String, color: UIColor, font: UIFont?) {
         
         button.setTitle(title, for: .normal)
-        button.setTitleColor(titleColor, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.titleLabel?.font = font
         
     }
 }

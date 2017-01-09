@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     
     let tabBar: TabBar = TabBar(tabs: ["First", "Second", "Third"],
                                 titleColor: ViewController.TitleColor,
-                                indicatorColor: ViewController.IndicatorColor)
+                                indicatorColor: ViewController.IndicatorColor,
+                                font: UIFont(name: "Avenir", size: 14))
     
     override func viewDidLoad() {
         super.viewDidLoad()
