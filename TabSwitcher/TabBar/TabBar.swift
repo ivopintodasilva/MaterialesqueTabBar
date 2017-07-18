@@ -121,7 +121,7 @@ extension TabBar: TabButtonDelegate {
         /// Chain animate the indicator change
         UIView.animateKeyframes(withDuration: 0.9, delay: 0, options: .beginFromCurrentState, animations: {
             
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: (0.25)) {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: (0.20)) {
                 
                 if let widthConstraint = self.indicatorWidth {
                     self.removeConstraint(widthConstraint)
@@ -136,7 +136,7 @@ extension TabBar: TabButtonDelegate {
                 self.layoutIfNeeded()
             }
             
-            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.5) {
+            UIView.addKeyframe(withRelativeStartTime: 0.20, relativeDuration: 0.35) {
                 self.removeConstraint(centerConstraint)
                 
                 constrain(self.indicator, self.tabButtons[index]) { indicator, selectedTab in
@@ -146,7 +146,7 @@ extension TabBar: TabButtonDelegate {
                 self.layoutIfNeeded()
             }
             
-            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+            UIView.addKeyframe(withRelativeStartTime: 0.55, relativeDuration: 0.20) {
                 
                 if let widthConstraint = self.indicatorWidth {
                     self.removeConstraint(widthConstraint)
