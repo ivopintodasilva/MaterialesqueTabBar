@@ -9,15 +9,26 @@
 import UIKit
 import Cartography
 
+/**
+ The tab button delegate to delegate the button tapped action
+ */
+protocol TabBarDelegate: class {
+    func buttonTapped(index: Int)
+}
+
 class TabBar: UIView {
     
     internal var tabButtons: [TabButton] = []
     
     internal let indicator: UIView = UIView(frame: CGRect.zero)
+    
+    weak var delegate: TabBarDelegate?
 
-    init(tabs: [String], titleColor: UIColor, indicatorColor: UIColor, font: UIFont?) {
+    init(tabs: [String], titleColor: UIColor, backgroundColor: UIColor, indicatorColor: UIColor, font: UIFont?) {
         
         super.init(frame: CGRect.zero)
+        
+        self.backgroundColor = backgroundColor
         
         for i in 0 ..< tabs.count {
             ///  Create and configure the tab buttons
@@ -99,6 +110,8 @@ class TabBar: UIView {
 extension TabBar: TabButtonDelegate {
     
     func buttonTapped(index: Int) {
+        
+        delegate?.buttonTapped(index: index)
         
         /// Make sure that the width constraint already exists
         guard let centerConstraint = indicatorCenter
