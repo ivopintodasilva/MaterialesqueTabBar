@@ -9,10 +9,11 @@
 import UIKit
 import Cartography
 
-class ViewController: UIPageViewController {
+class ViewController: UIViewController {
     
     let tabBar: TabBar
     let children: [TabBarChild]
+    let pageViewController: UIPageViewController
     
     required init?(coder aDecoder: NSCoder) {
         
@@ -28,7 +29,9 @@ class ViewController: UIPageViewController {
                         indicatorColor: ViewController.IndicatorColor,
                         font: ViewController.TitleFont)
         
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
@@ -47,8 +50,8 @@ class ViewController: UIPageViewController {
      Set the delegates
      */
     private func assignDelegates() {
-        dataSource = self
-        delegate = self
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
         
         tabBar.delegate = self
     }
@@ -60,7 +63,7 @@ class ViewController: UIPageViewController {
         
         guard let first: UIViewController = children.first?.viewController else { return }
         
-        setViewControllers([first], direction: .forward, animated: false, completion: nil)
+        pageViewController.setViewControllers([first], direction: .forward, animated: false, completion: nil)
     }
     
     /**
@@ -68,6 +71,7 @@ class ViewController: UIPageViewController {
      */
     private func addSubviews() {
         view.addSubview(tabBar)
+        view.addSubview(pageViewController.view)
     }
     
     /**
@@ -76,12 +80,17 @@ class ViewController: UIPageViewController {
     private func addConstraints() {
         let statusBarFrame: CGRect = UIApplication.shared.statusBarFrame
         
-        constrain(self.view, tabBar) { container, tabBar in
+        constrain(self.view, tabBar, pageViewController.view) { container, tabBar, pager in
             tabBar.leading == container.leading
             tabBar.trailing == container.trailing
             
             tabBar.top == container.top + statusBarFrame.height
             tabBar.bottom == container.top + statusBarFrame.height + ViewController.TabBarHeight
+            
+            pager.top == tabBar.bottom
+            pager.bottom == container.bottom
+            pager.leading == container.leading
+            pager.trailing == container.trailing
         }
     }
     
@@ -142,6 +151,6 @@ extension ViewController: UIPageViewControllerDataSource {
 
 extension ViewController: TabBarDelegate {
     func buttonTapped(index: Int) {
-        setViewControllers([children[index].viewController], direction: .forward, animated: true, completion: nil)
+        pageViewController.setViewControllers([children[index].viewController], direction: .forward, animated: true, completion: nil)
     }
 }
