@@ -18,9 +18,9 @@ class ViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         
         children = [
-            TabBarChild(title: "First", viewController: BlueViewController()),
-            TabBarChild(title: "Second", viewController: RedViewController()),
-            TabBarChild(title: "Third", viewController: GreenViewController()),
+            TabBarChild(title: "Blue", viewController: BlueViewController()),
+            TabBarChild(title: "White", viewController: RedViewController()),
+            TabBarChild(title: "Green", viewController: GreenViewController()),
         ]
         
         tabBar = TabBar(tabs: children.map{ $0.title },
@@ -106,6 +106,9 @@ class ViewController: UIViewController {
 
 extension ViewController: UIPageViewControllerDelegate {
     
+    /**
+     When there's an expected transition, update the Tab Bar accordingly
+     */
     @available(iOS 6.0, *)
     public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
     
@@ -145,11 +148,13 @@ extension ViewController: UIPageViewControllerDataSource {
         guard let index: Int = activeIndex, index < children.count - 1 else { return nil }
         
         return children[index + 1].viewController
-
     }
 }
 
 extension ViewController: TabBarDelegate {
+    /**
+     When a button is tapped on the Tab Bar, change the page in the UIPageViewController
+     */
     func buttonTapped(index: Int) {
         pageViewController.setViewControllers([children[index].viewController], direction: .forward, animated: true, completion: nil)
     }

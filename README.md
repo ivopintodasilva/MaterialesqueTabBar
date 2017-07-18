@@ -2,7 +2,7 @@
 
 Demo:
 
-![alt text](https://media.giphy.com/media/121QInDOhBfZKM/giphy.gif "Tab bar button selection indicator animation")
+![alt text](https://media.giphy.com/media/3ohz6qtTfOqVFYVgYw/giphy.gif "Tab bar button selection indicator animation")
 
 Iteration #1: 
 - This is a mini-project to deliver an animated material-like tab bar library that anyone can add to their app;
