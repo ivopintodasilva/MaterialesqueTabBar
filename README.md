@@ -1,4 +1,8 @@
-# Material-like animatable Tab Bar implementation
+# UIViewController featuring a customisable Tab Bar and UIPageViewController
+
+Demo:
+
+![alt text](https://media.giphy.com/media/121QInDOhBfZKM/giphy.gif "Tab bar button selection indicator animation")
 
 Iteration #1: 
 - This is a mini-project to deliver an animated material-like tab bar library that anyone can add to their app;
@@ -19,6 +23,3 @@ Iteration #4:
 - Each TabBarChild features a title (used to configure the tab) and a UIViewController (Used as a page in the UIPageViewController);
 - Both the TabBar and the UIPageViewController getting updated when the other changes state (on tab click or page change).
 
-The current state of the project:
-
-![alt text](https://media.giphy.com/media/121QInDOhBfZKM/giphy.gif "Tab bar button selection indicator animation")
